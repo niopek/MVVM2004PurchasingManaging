@@ -1,0 +1,179 @@
+﻿<Window x:Class="MVVM2004PurchasingManaging.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVM2004PurchasingManaging.Views"
+        xmlns:viewModels="clr-namespace:MVVM2004PurchasingManaging.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip"
+        x:Name="window"
+        Title="Managing Application" Height="700" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="215" MaxWidth="215"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!---  CONTENT BORDER   -->
+        <Border Background="GhostWhite"
+                Grid.Column="1"
+                Grid.Row="1"/>
+
+        <!---  LEFT MENU   -->
+        <Border Style="{StaticResource MenuBorder}"
+                Grid.Column="0"
+                Grid.Row="1"
+                />
+        <!---  TOP BORDER   -->
+        <Border Style="{StaticResource TopBorder}"
+                Grid.ColumnSpan="2"
+                x:Name="TopBorder"
+                MouseDown="TopBorder_MouseDown"/>
+
+        <!---  TITLE   -->
+        <Label Content="Managing Application"
+               VerticalContentAlignment="Center"
+               Padding="15 0 0 0"
+               FontSize="16"
+               Foreground="GhostWhite"
+                   />
+
+        <!---  MINIMALIZE, MAXIMALIZE, CLOSE   -->
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Grid.Column="1">
+            <!---  MINIMALIZE   -->
+            <Label Content="-"
+                   x:Name="Minimalize"
+                   MouseUp="Minimalize_MouseUp"
+                   Style="{StaticResource LabelWindowManaging}"
+                   FontSize="24"
+                   Padding="0 -3 0 0"/>
+            <!---  MAXIMALIZE   -->
+            <Label Content="[]"
+                   x:Name="Maximalize"
+                   MouseUp="Maximalize_MouseUp"
+                   Style="{StaticResource LabelWindowManaging}"
+                   FontSize="20"
+                   Padding="0 0 0 0"/>
+            <!---  CLOSE   -->
+            <Label Content="X"
+                   x:Name="Close"
+                   MouseUp="Close_MouseUp"
+                   Style="{StaticResource LabelWindowManaging}"
+                   FontSize="20"
+                   Padding="0 3 0 0"/>
+        </StackPanel>
+        <!---  NAV   -->
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              Margin="0 10 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <!---  HOME NAV   -->
+            <Image Source="../Images/icons-img.png"
+                   Grid.Row="0"
+                   Margin="0 20 0 20"/>
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="1"
+                        x:Name="HomeNav"
+                        MouseUp="HomeNav_MouseUp">
+
+                <Image Source="../Images/icons-home.png"
+                       Width="32"
+                       Margin="15 0 0 0"/>
+
+                <Button Width="100"
+                        Content="HOMEPAGE"
+                        Command="{Binding GoToHomeUC}"/>
+
+            </StackPanel>
+
+            <!---  DATABASE NAV   -->
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="2"
+                        x:Name="DatabaseNav"
+                        MouseUp="DatabaseNav_MouseUp">
+
+                <Image Source="../Images/icons-database.png"
+                       Width="32"
+                       Margin="15 0 0 0"/>
+
+                <Button Width="100"
+                        Content="DATABASE"
+                        Command="{Binding GoToDatabaseUC}"/>
+
+            </StackPanel>
+
+            <!---  DOCUMENT NAV   -->
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="3"
+                        x:Name="DocumentNav"
+                        MouseUp="DocumentNav_MouseUp">
+
+                <Image Source="../Images/icons-document.png"
+                       Width="32"
+                       Margin="15 0 0 0"/>
+
+                <Label Content="DOCUMENT"
+                       Style="{StaticResource LabelMenuNavigation}"/>
+
+            </StackPanel>
+
+            <!---  SEARCH NAV   -->
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="4"
+                        x:Name="SearchNav"
+                        MouseUp="SearchNav_MouseUp">
+
+                <Image Source="../Images/icons-search.png"
+                       Width="32"
+                       Margin="15 0 0 0"/>
+
+                <Label Content="SEARCH"
+                       Style="{StaticResource LabelMenuNavigation}"/>
+
+            </StackPanel>
+
+            <!---  SETTINGS NAV   -->
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="5"
+                        x:Name="SettingsNav"
+                        MouseUp="SettingsNav_MouseUp">
+
+                <Image Source="../Images/icons-settings.png"
+                       Width="32"
+                       Margin="15 0 0 0"/>
+
+                <Label Content="SETTINGS"
+                       Style="{StaticResource LabelMenuNavigation}"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <ContentControl Grid.Row="1"
+                        Grid.Column="1"
+                        Padding="10"
+                        x:Name="MainWindowFrame"
+                        Content="{Binding CurrentViewModel}"/>
+
+    </Grid>
+</Window>
