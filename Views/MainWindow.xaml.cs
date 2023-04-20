@@ -9,11 +9,14 @@ namespace MVVM2004PurchasingManaging.Views;
 public partial class MainWindow : Window
 {
     IMainWindowViewModel _viewModel;
+    private SolidColorBrush _colorBrush;
     public MainWindow(IMainWindowViewModel viewModel)
     {
         _viewModel = viewModel;
         this.DataContext = _viewModel;
+        _colorBrush = new SolidColorBrush(Color.FromRgb(61, 81, 255));
         InitializeComponent();
+        HomeNav.Background = _colorBrush;
     }
 
     private void Minimalize_MouseUp(object sender, MouseButtonEventArgs e) => window.WindowState = WindowState.Minimized;
@@ -41,21 +44,32 @@ public partial class MainWindow : Window
         }
     }
 
-    private void DocumentNav_MouseUp(object sender, MouseButtonEventArgs e)
+    private void HomeNav_Click(object sender, RoutedEventArgs e)
     {
         SetNavMenuColorToNomral();
-        DocumentNav.Background = new SolidColorBrush(Color.FromRgb(61, 81, 255));
-    }
-    private void SearchNav_MouseUp(object sender, MouseButtonEventArgs e)
-    {
-        SetNavMenuColorToNomral();
-        SearchNav.Background = new SolidColorBrush(Color.FromRgb(61, 81, 255));
+        HomeNav.Background = _colorBrush;
     }
 
-    private void SettingsNav_MouseUp(object sender, MouseButtonEventArgs e)
+    private void IndeksFormNav_Click(object sender, RoutedEventArgs e)
     {
         SetNavMenuColorToNomral();
-        SettingsNav.Background = new SolidColorBrush(Color.FromRgb(61, 81, 255));
+        IndeksFormNav.Background = _colorBrush;
+    }
+
+    private void SupplierFormNav_Click(object sender, RoutedEventArgs e)
+    {
+        SetNavMenuColorToNomral();
+        SupplierFormNav.Background = _colorBrush;
+    }
+    private void PlantFormNav_Click(object sender, RoutedEventArgs e)
+    {
+        SetNavMenuColorToNomral();
+        PlantFormNav.Background = _colorBrush;
+    }
+    private void SearchNav_Click(object sender, RoutedEventArgs e)
+    {
+        SetNavMenuColorToNomral();
+        SearchNav.Background = _colorBrush;
     }
 
 
@@ -64,21 +78,11 @@ public partial class MainWindow : Window
     {
         SolidColorBrush color = Brushes.SteelBlue;
         HomeNav.Background = color;
-        DatabaseNav.Background = color;
-        DocumentNav.Background = color;
+        IndeksFormNav.Background = color;
+        SupplierFormNav.Background = color;
+        PlantFormNav.Background = color;
         SearchNav.Background = color;
-        SettingsNav.Background = color;
     }
 
-    private void HomeNav_Click(object sender, RoutedEventArgs e)
-    {
-        SetNavMenuColorToNomral();
-        HomeNav.Background = new SolidColorBrush(Color.FromRgb(61, 81, 255));
-    }
 
-    private void DatabaseNav_Click(object sender, RoutedEventArgs e)
-    {
-        SetNavMenuColorToNomral();
-        DatabaseNav.Background = new SolidColorBrush(Color.FromRgb(61, 81, 255));
-    }
 }

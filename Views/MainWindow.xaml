@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MVVM2004PurchasingManaging.Views"
-        xmlns:viewModels="clr-namespace:MVVM2004PurchasingManaging.ViewModel" 
-        d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}"
+        xmlns:local="clr-namespace:MVVM2004PurchasingManaging.Views" 
+        xmlns:viewmodel="clr-namespace:MVVM2004PurchasingManaging.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -20,7 +20,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="215" MaxWidth="215"/>
+            <ColumnDefinition Width="225" MaxWidth="225"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
@@ -99,6 +99,8 @@
                     x:Name="HomeNav"
                     Background="Transparent"
                     BorderThickness="0"
+                    FontSize="20"
+                    FontWeight="Bold"
                     Click="HomeNav_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -122,14 +124,16 @@
 
            
 
-            <!---  DATABASE NAV   -->
-            <Button Command="{Binding GoToDatabaseUC}"
-                    Content="DATABASE"
+            <!---  INDEKS FORM NAV   -->
+            <Button Command="{Binding GoToIndeksFormUC}"
+                    Content="INDEKS FORM"
                     Grid.Row="2"
-                    x:Name="DatabaseNav"
+                    x:Name="IndeksFormNav"
                     Background="Transparent"
                     BorderThickness="0"
-                    Click="DatabaseNav_Click">
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Click="IndeksFormNav_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" 
@@ -151,50 +155,94 @@
             </Button>
 
 
-            <!---  DOCUMENT NAV   -->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="3"
-                        x:Name="DocumentNav"
-                        MouseUp="DocumentNav_MouseUp">
-
-                <Image Source="../Images/icons-document.png"
-                       Width="32"
-                       Margin="15 0 0 0"/>
-
-                <Label Content="DOCUMENT"
-                       Style="{StaticResource LabelMenuNavigation}"/>
-
-            </StackPanel>
+            <!---  SUPPLIER NAV   -->
+            <Button Command="{Binding GoToSupplierFormUC}"
+                    Content="SUPPLIER FORM"
+                    Grid.Row="3"
+                    x:Name="SupplierFormNav"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Click="SupplierFormNav_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="10 5 10 5">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/icons-database.png" 
+                                       Width="40" 
+                                       Height="40" />
+                                <ContentPresenter Width="160"
+                                                  Margin="5"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!---  PLANT NAV   -->
+            <Button Command="{Binding GoToPlantFormUC}"
+                    Content="PLANT FORM"
+                    Grid.Row="4"
+                    x:Name="PlantFormNav"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Click="PlantFormNav_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="10 5 10 5">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/icons-database.png" 
+                                       Width="40" 
+                                       Height="40" />
+                                <ContentPresenter Width="160"
+                                                  Margin="5"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
             <!---  SEARCH NAV   -->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="4"
-                        x:Name="SearchNav"
-                        MouseUp="SearchNav_MouseUp">
-
-                <Image Source="../Images/icons-search.png"
-                       Width="32"
-                       Margin="15 0 0 0"/>
-
-                <Label Content="SEARCH"
-                       Style="{StaticResource LabelMenuNavigation}"/>
-
-            </StackPanel>
-
-            <!---  SETTINGS NAV   -->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="5"
-                        x:Name="SettingsNav"
-                        MouseUp="SettingsNav_MouseUp">
-
-                <Image Source="../Images/icons-settings.png"
-                       Width="32"
-                       Margin="15 0 0 0"/>
-
-                <Label Content="SETTINGS"
-                       Style="{StaticResource LabelMenuNavigation}"/>
-
-            </StackPanel>
+            <Button Command="{Binding GoToSearchUC}"
+                    Content="SEARCH"
+                    Grid.Row="5"
+                    x:Name="SearchNav"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Click="SearchNav_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="10 5 10 5">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/icons-search.png" 
+                                       Width="40" 
+                                       Height="40" />
+                                <ContentPresenter Width="160"
+                                                  Margin="5"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
         </Grid>
 

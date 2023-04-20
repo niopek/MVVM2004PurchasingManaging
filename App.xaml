@@ -8,8 +8,17 @@
         <DataTemplate DataType="{x:Type local:HomeViewModel}">
             <uc:HomeUserControl />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:DatabaseViewModel}">
-            <uc:DatabaseUC />
+        <DataTemplate DataType="{x:Type local:IndeksFormViewModel}">
+            <uc:IndeksFormUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:SupplierFormViewModel}">
+            <uc:SupplierFormUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:PlantFormViewModel}">
+            <uc:PlantFormUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:SearchViewModel}">
+            <uc:SearchUserControl/>
         </DataTemplate>
 
 

@@ -1,12 +1,10 @@
 ﻿using System.Windows.Controls;
 
-
 namespace MVVM2004PurchasingManaging.UserControls;
 
-
-public partial class HomeUserControl : UserControl
+public partial class SearchUserControl : UserControl
 {
-    public HomeUserControl()
+    public SearchUserControl()
     {
         InitializeComponent();
     }

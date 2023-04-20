@@ -4,9 +4,9 @@
 namespace MVVM2004PurchasingManaging.UserControls;
 
 
-public partial class HomeUserControl : UserControl
+public partial class IndeksFormUserControl : UserControl
 {
-    public HomeUserControl()
+    public IndeksFormUserControl()
     {
         InitializeComponent();
     }
