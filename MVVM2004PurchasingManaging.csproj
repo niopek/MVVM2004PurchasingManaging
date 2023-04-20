@@ -12,6 +12,7 @@
     <None Remove="Images\icons-database.png" />
     <None Remove="Images\icons-document.png" />
     <None Remove="Images\icons-home.png" />
+    <None Remove="Images\icons-img.png" />
     <None Remove="Images\icons-search.png" />
     <None Remove="Images\icons-settings.png" />
   </ItemGroup>
@@ -36,6 +37,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\icons-home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\icons-img.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\icons-search.png">

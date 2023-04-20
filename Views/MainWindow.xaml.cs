@@ -41,18 +41,6 @@ public partial class MainWindow : Window
         }
     }
 
-    private void HomeNav_MouseUp(object sender, MouseButtonEventArgs e)
-    {
-        SetNavMenuColorToNomral();
-        HomeNav.Background = new SolidColorBrush(Color.FromRgb(61, 81, 255));
-    }
-
-    private void DatabaseNav_MouseUp(object sender, MouseButtonEventArgs e)
-    {
-        SetNavMenuColorToNomral();
-        DatabaseNav.Background = new SolidColorBrush(Color.FromRgb(61, 81, 255));
-    }
-
     private void DocumentNav_MouseUp(object sender, MouseButtonEventArgs e)
     {
         SetNavMenuColorToNomral();
@@ -80,5 +68,17 @@ public partial class MainWindow : Window
         DocumentNav.Background = color;
         SearchNav.Background = color;
         SettingsNav.Background = color;
+    }
+
+    private void HomeNav_Click(object sender, RoutedEventArgs e)
+    {
+        SetNavMenuColorToNomral();
+        HomeNav.Background = new SolidColorBrush(Color.FromRgb(61, 81, 255));
+    }
+
+    private void DatabaseNav_Click(object sender, RoutedEventArgs e)
+    {
+        SetNavMenuColorToNomral();
+        DatabaseNav.Background = new SolidColorBrush(Color.FromRgb(61, 81, 255));
     }
 }

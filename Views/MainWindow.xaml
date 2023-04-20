@@ -87,40 +87,69 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-            <!---  HOME NAV   -->
+            
             <Image Source="../Images/icons-img.png"
                    Grid.Row="0"
                    Margin="0 20 0 20"/>
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="1"
-                        x:Name="HomeNav"
-                        MouseUp="HomeNav_MouseUp">
 
-                <Image Source="../Images/icons-home.png"
-                       Width="32"
-                       Margin="15 0 0 0"/>
+            <!---  HOME NAV   -->
+            <Button Command="{Binding GoToHomeUC}"
+                    Content="HOMEPAGE"
+                    Grid.Row="1"
+                    x:Name="HomeNav"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="HomeNav_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Padding="10 5 10 5">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="../Images/icons-home.png" 
+                                           Width="40" 
+                                           Height="40"/>
+                                    <ContentPresenter Width="150"
+                                                      Margin="5"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
 
-                <Button Width="100"
-                        Content="HOMEPAGE"
-                        Command="{Binding GoToHomeUC}"/>
-
-            </StackPanel>
+           
 
             <!---  DATABASE NAV   -->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="2"
-                        x:Name="DatabaseNav"
-                        MouseUp="DatabaseNav_MouseUp">
+            <Button Command="{Binding GoToDatabaseUC}"
+                    Content="DATABASE"
+                    Grid.Row="2"
+                    x:Name="DatabaseNav"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="DatabaseNav_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="10 5 10 5">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/icons-database.png" 
+                                       Width="40" 
+                                       Height="40" />
+                                <ContentPresenter Width="150"
+                                                  Margin="5"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
-                <Image Source="../Images/icons-database.png"
-                       Width="32"
-                       Margin="15 0 0 0"/>
-
-                <Button Width="100"
-                        Content="DATABASE"
-                        Command="{Binding GoToDatabaseUC}"/>
-
-            </StackPanel>
 
             <!---  DOCUMENT NAV   -->
             <StackPanel Orientation="Horizontal"
