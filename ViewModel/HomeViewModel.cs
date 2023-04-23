@@ -1,8 +1,9 @@
-﻿using MVVM2004PurchasingManaging.Interfaces;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MVVM2004PurchasingManaging.Interfaces;
 
 namespace MVVM2004PurchasingManaging.ViewModel;
 
-public class HomeViewModel : BaseViewModel
+public partial class HomeViewModel : ObservableObject
 {
 	public HomeViewModel()
 	{

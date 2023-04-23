@@ -1,6 +1,8 @@
-﻿namespace MVVM2004PurchasingManaging.ViewModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class SupplierFormViewModel : BaseViewModel
+namespace MVVM2004PurchasingManaging.ViewModel;
+
+public partial class SupplierFormViewModel : ObservableObject
 {
     public SupplierFormViewModel()
     {

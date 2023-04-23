@@ -9,10 +9,11 @@ using System.Windows;
 using MVVM2004PurchasingManaging.Interfaces;
 using System.Linq;
 using MVVM2004PurchasingManaging.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace MVVM2004PurchasingManaging.ViewModel;
 
-public class IndeksFormViewModel : BaseViewModel
+public partial class IndeksFormViewModel : ObservableObject
 {
     private readonly IIndeksFormService service;
     public IndeksFormViewModel(IIndeksFormService indeksFormService)

@@ -2,15 +2,33 @@
 using MVVM2004PurchasingManaging.Interfaces;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 using System.Windows;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Threading.Tasks;
 
 namespace MVVM2004PurchasingManaging.ViewModel;
 
-public class PlantFormViewModel : BaseViewModel
+public partial class PlantFormViewModel : ObservableObject
 {
+    // PROPERTIES
     private readonly IPlantFormService? service;
 
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AddPlantCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DeletePlantCommand))]
+    [NotifyCanExecuteChangedFor(nameof(EditPlantCommand))]
+    private int _plantId;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AddPlantCommand))]
+    [NotifyCanExecuteChangedFor(nameof(EditPlantCommand))]
+    private string? _plantName;
+
+    [ObservableProperty]
+    private ObservableCollection<Plant>? _listOfPlants;
+
+    // CTORS
     public PlantFormViewModel()
     {
 
@@ -20,108 +38,67 @@ public class PlantFormViewModel : BaseViewModel
         this.service = plantFormService;
         ListOfPlants = service.GetAll();
     }
-    public ObservableCollection<Plant>? ListOfPlants { get; set; }
 
-    public int PlantId { get; set; }
-    public string? PlantName { get; set; }
+    // FUNCTIONS
 
-    private ICommand? addPlant = null;
-    public ICommand AddPlantCommand
+    [RelayCommand(CanExecute = nameof(AreTextBoxFilled))]
+    private async Task AddPlant()
     {
-        get
+        await Task.Run(async () => 
         {
-            if (addPlant == null)
+            Plant newPlant = new() { PlantId = this.PlantId, Name = PlantName! };
+
+            if (!DoPlantExist(newPlant))
             {
-                addPlant = new RelayCommand(
-                    async (o) =>
-                    {
-                        Plant newPlant = new() { PlantId = this.PlantId, Name = PlantName! };
-
-                        if (!DoPlantExist(newPlant))
-                        {
-                            ListOfPlants = await service!.AddPlant(newPlant);
-                            OnPropertyChanged(nameof(ListOfPlants));
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Zaklad {newPlant.PlantId} juz istnieje!");
-                        }
-                    },
-
-                   (o) =>
-                   {
-                       return AreTextBoxFilled();
-                   });
+                ListOfPlants = await service!.AddPlant(newPlant);
             }
-
-            return addPlant;
-        }
+            else
+            {
+                MessageBox.Show($"Zaklad {newPlant.PlantId} juz istnieje!");
+            }
+        });
+        
     }
 
-    private ICommand? deletePlant = null;
-    public ICommand DeletePlantCommand
+    [RelayCommand(CanExecute = nameof(IsIdTextBoxFilled))]
+    private async Task DeletePlant()
     {
-        get
+        await Task.Run(async () =>
         {
-            if (deletePlant == null)
+            var plant = ListOfPlants.FirstOrDefault(p => p.PlantId == this.PlantId);
+
+            if (plant != null)
             {
-                deletePlant = new RelayCommand(
-                    async (o) =>
-                    {
-                        var plant = ListOfPlants.FirstOrDefault(p => p.PlantId == this.PlantId);
-
-                        if (plant != null)
-                        {
-                            ListOfPlants = await service!.RemovePlant(plant);
-                            OnPropertyChanged(nameof(ListOfPlants));
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Zaklad {this.PlantId} nie istnieje!");
-                        }
-
-                    },
-                    (o) =>
-                    {
-                        return IsIdTextBoxFilled();
-                    });
+                ListOfPlants = await service!.RemovePlant(plant);
             }
-            return deletePlant;
-        }
+            else
+            {
+                MessageBox.Show($"Zaklad {this.PlantId} nie istnieje!");
+            }
+        });
+
     }
 
-    private ICommand? editPlant = null;
-    public ICommand EditPlantCommand
+    [RelayCommand(CanExecute = nameof(AreTextBoxFilled))]
+    private async Task EditPlant()
     {
-        get
+        await Task.Run(async () =>
         {
-            if (editPlant == null)
+            Plant plant = new() { PlantId = this.PlantId, Name = this.PlantName! };
+
+            if (DoPlantExistByInt(PlantId))
             {
-                editPlant = new RelayCommand(
-                    async (o) =>
-                    {
-                        Plant plant = new() { PlantId = this.PlantId, Name = this.PlantName! };
-
-                        if (DoPlantExistByInt(PlantId))
-                        {
-                            ListOfPlants = await service!.EditPlant(plant);
-                            OnPropertyChanged(nameof(ListOfPlants));
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Zaklad {this.PlantId} nie istnieje!");
-                        }
-
-                    },
-                    (o) =>
-                    {
-                        return AreTextBoxFilled();
-                    });
+                ListOfPlants = await service!.EditPlant(plant);
             }
-            return editPlant;
-        }
+            else
+            {
+                MessageBox.Show($"Zaklad {this.PlantId} nie istnieje!");
+            }
+        });
+
     }
 
+    // TESTS
     private bool DoPlantExist(Plant newPlant) => ListOfPlants.FirstOrDefault(p => p.PlantId == newPlant.PlantId) == null ? false : true;
     private bool DoPlantExistByInt(int newPlant) => ListOfPlants.FirstOrDefault(p => p.PlantId == newPlant) == null ? false : true;
     private bool AreTextBoxFilled() => this.PlantId != 0 && this.PlantName != null && this.PlantName != "" ? true : false;

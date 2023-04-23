@@ -93,7 +93,7 @@
                    Margin="0 20 0 20"/>
 
             <!---  HOME NAV   -->
-            <Button Command="{Binding GoToHomeUC}"
+            <Button Command="{Binding GoToHomeUCCommand}"
                     Content="HOMEPAGE"
                     Grid.Row="1"
                     x:Name="HomeNav"
@@ -125,7 +125,7 @@
            
 
             <!---  INDEKS FORM NAV   -->
-            <Button Command="{Binding GoToIndeksFormUC}"
+            <Button Command="{Binding GoToIndeksFormUCCommand}"
                     Content="INDEKS FORM"
                     Grid.Row="2"
                     x:Name="IndeksFormNav"
@@ -156,7 +156,7 @@
 
 
             <!---  SUPPLIER NAV   -->
-            <Button Command="{Binding GoToSupplierFormUC}"
+            <Button Command="{Binding GoToSupplierFormUCCommand}"
                     Content="SUPPLIER FORM"
                     Grid.Row="3"
                     x:Name="SupplierFormNav"
@@ -185,7 +185,7 @@
                 </Button.Template>
             </Button>
             <!---  PLANT NAV   -->
-            <Button Command="{Binding GoToPlantFormUC}"
+            <Button Command="{Binding GoToPlantFormUCCommand}"
                     Content="PLANT FORM"
                     Grid.Row="4"
                     x:Name="PlantFormNav"
@@ -215,7 +215,7 @@
             </Button>
 
             <!---  SEARCH NAV   -->
-            <Button Command="{Binding GoToSearchUC}"
+            <Button Command="{Binding GoToSearchUCCommand}"
                     Content="SEARCH"
                     Grid.Row="5"
                     x:Name="SearchNav"

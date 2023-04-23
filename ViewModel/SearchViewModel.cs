@@ -1,7 +1,9 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace MVVM2004PurchasingManaging.ViewModel;
 
-public class SearchViewModel : BaseViewModel
+public partial class SearchViewModel : ObservableObject
 {
     public SearchViewModel()
     {
