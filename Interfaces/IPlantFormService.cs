@@ -6,8 +6,8 @@ namespace MVVM2004PurchasingManaging.Interfaces;
 
 public interface IPlantFormService
 {
-    Task<ObservableCollection<Plant>> AddPlant(Plant newPlant);
-    Task<ObservableCollection<Plant>> RemovePlant(Plant plantToRemove);
-    Task<ObservableCollection<Plant>> EditPlant(Plant plantToUpdate);
-    ObservableCollection<Plant> GetAll();
+    Task<ObservableCollection<Plant>?> AddPlant(Plant newPlant);
+    Task<ObservableCollection<Plant>?> RemovePlant(Plant plantToRemove);
+    Task<ObservableCollection<Plant>?> EditPlant(Plant plantToUpdate);
+    ObservableCollection<Plant>? GetAll();
 }

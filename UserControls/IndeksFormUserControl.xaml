@@ -179,7 +179,8 @@
                   ItemsSource="{Binding ListOfIndekses, NotifyOnSourceUpdated=True}" 
                   Style="{StaticResource DataGridStyle}"
                   ColumnHeaderStyle="{StaticResource DataGridColumnStyle}"
-                  CellStyle="{StaticResource DataGridCellStyleFS12P5}">
+                  CellStyle="{StaticResource DataGridCellStyleFS12P5}"
+                  >
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="INDEKS"

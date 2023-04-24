@@ -21,72 +21,48 @@ public class PlantFormService : IPlantFormService
         this.context = context;
     }
 
-    public async Task<ObservableCollection<Plant>> AddPlant(Plant newPlant)
+    public async Task<ObservableCollection<Plant>?> AddPlant(Plant newPlant)
     {
-        List<Plant>? ListOfPlants = new();
-
-        context.Plants.Add(newPlant);
-        context.SaveChanges();
-
-        ListOfPlants = await context.Plants.ToListAsync();
-
-        if(ListOfPlants == null)
+        await Task.Run(() =>
         {
-            throw new NotImplementedException();
-        }
-
-        return ListOfPlants.ToObservableCollection()!;
-    }
-
-    public async Task<ObservableCollection<Plant>> RemovePlant(Plant plantToRemove)
-    {
-        List<Plant>? ListOfPlants = new();
-
-        context.Plants.Remove(plantToRemove);
-        context.SaveChanges();
-
-        ListOfPlants = await context.Plants.ToListAsync();
-        if (ListOfPlants == null)
-        {
-            throw new NotImplementedException();
-        }
-
-        return ListOfPlants.ToObservableCollection()!;
-    }
-
-    public async Task<ObservableCollection<Plant>> EditPlant(Plant plantToUpdate)
-    {
-        List<Plant>? ListOfPlants = new();
-
-        var editingPlant = context.Plants.FirstOrDefault(p => p.PlantId == plantToUpdate.PlantId);
-        if (editingPlant != null)
-        {
-            editingPlant.Name = plantToUpdate.Name;
+            context.Plants.Add(newPlant);
             context.SaveChanges();
-        }
-        else
-        {
-            MessageBox.Show("Raczej nie, plant nie istnieje");
-        }
-
-        ListOfPlants = await context.Plants.ToListAsync();
-
-        if (ListOfPlants == null)
-        {
-            throw new NotImplementedException();
-        }
-        return ListOfPlants.ToObservableCollection()!;
+        });
+        return GetAll();
     }
 
-    public ObservableCollection<Plant> GetAll()
+    public async Task<ObservableCollection<Plant>?> RemovePlant(Plant plantToRemove)
     {
-        List<Plant>? ListOfPlants = new();
-        ListOfPlants = context.Plants.ToList();
-        if (ListOfPlants == null)
+        await Task.Run(() =>
         {
-            throw new NotImplementedException();
-        }
-        return ListOfPlants.ToObservableCollection()!;
+            context.Plants.Remove(plantToRemove);
+            context.SaveChanges();
+        });
+        return GetAll();
+    }
+
+    public async Task<ObservableCollection<Plant>?> EditPlant(Plant plantToUpdate)
+    {
+        await Task.Run(() =>
+        {
+            var editingPlant = context.Plants.FirstOrDefault(p => p.PlantId == plantToUpdate.PlantId);
+
+            if (editingPlant != null)
+            {
+                editingPlant.Name = plantToUpdate.Name;
+                context.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Raczej nie, plant nie istnieje");
+            }
+        });
+        return GetAll();
+    }
+
+    public ObservableCollection<Plant>? GetAll()
+    {
+        return context.Plants.ToObservableCollection();
     }
 
     

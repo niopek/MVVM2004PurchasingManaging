@@ -36,66 +36,64 @@ public partial class PlantFormViewModel : ObservableObject
     public PlantFormViewModel(IPlantFormService plantFormService)
     {
         this.service = plantFormService;
-        //ListOfPlants = service.GetAll();
+        LoadData();
     }
 
     // FUNCTIONS
 
     [RelayCommand(CanExecute = nameof(AreTextBoxFilled))]
-    private async Task AddPlant()
+    private async void AddPlant()
     {
-        await Task.Run(async () => 
-        {
-            Plant newPlant = new() { PlantId = this.PlantId, Name = PlantName! };
+        Plant newPlant = new() { PlantId = this.PlantId, Name = PlantName! };
 
-            if (!DoPlantExist(newPlant))
-            {
-                ListOfPlants = await service!.AddPlant(newPlant);
-            }
-            else
-            {
-                MessageBox.Show($"Zaklad {newPlant.PlantId} juz istnieje!");
-            }
-        });
-        
+        if (!DoPlantExist(newPlant))
+        {
+            ListOfPlants = await service!.AddPlant(newPlant);
+        }
+        else
+        {
+            MessageBox.Show($"Zaklad {newPlant.PlantId} juz istnieje!");
+        }
     }
 
     [RelayCommand(CanExecute = nameof(IsIdTextBoxFilled))]
-    private async Task DeletePlant()
+    private async void DeletePlant()
     {
-        await Task.Run(async () =>
+        var plant = ListOfPlants.FirstOrDefault(p => p.PlantId == this.PlantId);
+
+        if (plant != null)
         {
-            var plant = ListOfPlants.FirstOrDefault(p => p.PlantId == this.PlantId);
-
-            if (plant != null)
-            {
-                ListOfPlants = await service!.RemovePlant(plant);
-            }
-            else
-            {
-                MessageBox.Show($"Zaklad {this.PlantId} nie istnieje!");
-            }
-        });
-
+            ListOfPlants = await service!.RemovePlant(plant);
+        }
+        else
+        {
+            MessageBox.Show($"Zaklad {this.PlantId} nie istnieje!");
+        }
     }
 
     [RelayCommand(CanExecute = nameof(AreTextBoxFilled))]
-    private async Task EditPlant()
+    private async void EditPlant()
     {
-        await Task.Run(async () =>
+        Plant plant = new() { PlantId = this.PlantId, Name = this.PlantName! };
+
+        if (DoPlantExistByInt(PlantId))
         {
-            Plant plant = new() { PlantId = this.PlantId, Name = this.PlantName! };
+            ListOfPlants = await service!.EditPlant(plant);
+        }
+        else
+        {
+            MessageBox.Show($"Zaklad {this.PlantId} nie istnieje!");
+        }
+    }
 
-            if (DoPlantExistByInt(PlantId))
-            {
-                ListOfPlants = await service!.EditPlant(plant);
-            }
-            else
-            {
-                MessageBox.Show($"Zaklad {this.PlantId} nie istnieje!");
-            }
-        });
 
+    private async void LoadData()
+    {
+        var listOfPlants = await Task.Run(() => service.GetAll());
+        if (listOfPlants != null)
+        {
+            ListOfPlants = listOfPlants;
+        }
     }
 
     // TESTS

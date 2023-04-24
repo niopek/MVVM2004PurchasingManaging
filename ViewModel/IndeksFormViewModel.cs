@@ -13,6 +13,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.Collections.Generic;
 
 namespace MVVM2004PurchasingManaging.ViewModel;
 
@@ -22,7 +23,7 @@ public partial class IndeksFormViewModel : ObservableObject
     // PROPERTIES
     private readonly IIndeksFormService service;
     [ObservableProperty]
-    private ObservableCollection<Indeks> _listOfIndekses;
+    private ObservableCollection<Indeks>? _listOfIndekses = new();
 
     [NotifyCanExecuteChangedFor(nameof(AddIndeksCommand))]
     [NotifyCanExecuteChangedFor(nameof(DeleteIndeksCommand))]
@@ -41,12 +42,12 @@ public partial class IndeksFormViewModel : ObservableObject
     [NotifyCanExecuteChangedFor(nameof(AddIndeksCommand))]
     [NotifyCanExecuteChangedFor(nameof(EditIndeksCommand))]
     [ObservableProperty]
-    private string _unitOfMeasure;
+    private string _unitOfMeasure = "SZT";
 
     [NotifyCanExecuteChangedFor(nameof(AddIndeksCommand))]
     [NotifyCanExecuteChangedFor(nameof(EditIndeksCommand))]
     [ObservableProperty]
-    private string _tc;
+    private string _tc = "TC";
 
     [ObservableProperty]
     private string _path;
@@ -59,18 +60,18 @@ public partial class IndeksFormViewModel : ObservableObject
     public IndeksFormViewModel(IIndeksFormService indeksFormService)
     {
         service = indeksFormService;
-        
+        LoadData();
     }
 
     // FUNCTIONS 
     [RelayCommand(CanExecute = nameof(AreTextBoxFilled))]
-    private void AddIndeks()
+    private async void AddIndeks()
     {
         Indeks newIndeks = new() { Id = this.IndeksId, Name = this.IndeksName, Description = this.IndeksDescription, UnitOfMeasure = this.UnitOfMeasure, Tc = this.Tc };
 
         if (!DoIndeksExist(newIndeks))
         {
-            ListOfIndekses = service.AddIndeks(newIndeks);
+            ListOfIndekses = await service.AddIndeks(newIndeks);
         }
         else
         {
@@ -79,12 +80,12 @@ public partial class IndeksFormViewModel : ObservableObject
     }
 
     [RelayCommand(CanExecute = nameof(IsIdTextBoxFilled))]
-    private void DeleteIndeks()
+    private async void DeleteIndeks()
     {
         var indeks = ListOfIndekses.FirstOrDefault(s => s.Id == this.IndeksId);
         if (indeks != null)
         {
-            ListOfIndekses = service.RemoveIndeks(indeks);
+            ListOfIndekses = await service.RemoveIndeks(indeks);
         }
         else
         {
@@ -92,13 +93,13 @@ public partial class IndeksFormViewModel : ObservableObject
         }
     }
     [RelayCommand(CanExecute = nameof(AreTextBoxFilled))]
-    private void EditIndeks()
+    private async void EditIndeks()
     {
         Indeks indeks = new() { Id = this.IndeksId, Name = this.IndeksName, Description = this.IndeksDescription, UnitOfMeasure = this.UnitOfMeasure, Tc = this.Tc };
 
         if (DoIndeksExistByInt(IndeksId))
         {
-            ListOfIndekses = service.EditIndeks(indeks);
+            ListOfIndekses = await service.EditIndeks(indeks);
         }
         else
         {
@@ -127,11 +128,19 @@ public partial class IndeksFormViewModel : ObservableObject
             var listOfIndeksesFromExcel = await LoadingExcelService.DataTableWithIndeksesToList(dataTable);
             ListOfIndekses = await service.AddOrEditManyIndeksAsync(listOfIndeksesFromExcel);
         });
+        
 
         // closing new opened window
-        // Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive)?.Close();
+        Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive)?.Close();
 
-        MessageBox.Show($"Wczytywanie zakonczone");
+    }
+    public async void LoadData()
+    {
+        var listOfIndeks = await Task.Run(() => service.GetAll());
+        if (listOfIndeks != null)
+        {
+            ListOfIndekses = listOfIndeks;
+        }
     }
 
     // TESTS 

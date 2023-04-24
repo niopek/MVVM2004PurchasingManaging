@@ -29,38 +29,30 @@ public class IndeksFormService : IIndeksFormService
         this.service = provider;
         this.view = view;
     }
-    public ObservableCollection<Indeks> AddIndeks(Indeks newIndeks)
+    public async Task<ObservableCollection<Indeks>?> AddIndeks(Indeks newIndeks)
     {
-        ObservableCollection<Indeks> ListOfIndekses;
-
-        context.Indekses.Add(newIndeks);
-        context.SaveChanges();
-
-        ListOfIndekses = context.Indekses.ToObservableCollection();
-
-
-        return ListOfIndekses;
-    }
-
-    public ObservableCollection<Indeks> RemoveIndeks(Indeks IndeksToRemove)
-    {
-        ObservableCollection<Indeks> ListOfIndekses;
-
-        context.Indekses.Remove(IndeksToRemove);
-        context.SaveChanges();
-
-        ListOfIndekses = context.Indekses.ToObservableCollection();
-
-
-        return ListOfIndekses;
-    }
-
-    public ObservableCollection<Indeks> EditIndeks(Indeks IndeksToUpdate)
-    {
-        ObservableCollection<Indeks> ListOfIndekses = new();
-        try
+        await Task.Run(() => 
         {
+            context.Indekses.Add(newIndeks);
+            context.SaveChanges();
+        });
+        return GetAll();
+    }
 
+    public async Task<ObservableCollection<Indeks>?> RemoveIndeks(Indeks IndeksToRemove)
+    {
+        await Task.Run(() => 
+        {
+            context.Indekses.Remove(IndeksToRemove);
+            context.SaveChanges();
+        });
+        return GetAll();
+    }
+
+    public async Task<ObservableCollection<Indeks>?> EditIndeks(Indeks IndeksToUpdate)
+    {
+        await Task.Run(() => 
+        {
             var editingIndeks = context.Indekses.FirstOrDefault(s => s.Id == IndeksToUpdate.Id);
             if (editingIndeks != null)
             {
@@ -79,75 +71,60 @@ public class IndeksFormService : IIndeksFormService
             {
                 MessageBox.Show("Raczej nie, indeks nie istnieje");
             }
-
-            ListOfIndekses = context.Indekses.ToObservableCollection();
-
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message);
-        }
-        return ListOfIndekses;
+        });
+        return GetAll();
     }
 
-    public async Task<ObservableCollection<Indeks>> AddOrEditManyIndeksAsync(List<Indeks> listOfIndeks)
+    public async Task<ObservableCollection<Indeks>?> AddOrEditManyIndeksAsync(List<Indeks> listOfIndeks)
     {
-        ObservableCollection<Indeks> ListOfIndekses = new();
         await Task.Run(() =>
         {
-            try
+            int numberOfEditedIndekses = 0;
+            int numberOfAddedIndekses = 0;
+
+            var currentDbIndekses = context.Indekses.ToList();
+            foreach (var indeks in listOfIndeks)
             {
+                var isIndeksExistInDb = currentDbIndekses.FirstOrDefault(i => i.Id == indeks.Id);
 
-                var currentDbIndekses = context.Indekses.ToObservableCollection();
-                var listToAdd = new List<Indeks>();
-                var listToEdit = new List<Indeks>();
-                foreach (var indeks in listOfIndeks)
+                if (isIndeksExistInDb != null)
                 {
-                    var isIndeksExistInDb = currentDbIndekses.FirstOrDefault(i => i.Id == indeks.Id);
+                    isIndeksExistInDb.Name = indeks.Name;
+                    isIndeksExistInDb.Description = indeks.Description;
 
-                    if (isIndeksExistInDb != null)
+                    if (indeks.UnitOfMeasure != null && indeks.UnitOfMeasure != "")
+                        isIndeksExistInDb.UnitOfMeasure = indeks.UnitOfMeasure;
+
+                    if (indeks.Tc != null && indeks.Tc != "")
+                        isIndeksExistInDb.Tc = indeks.Tc;
+                    numberOfEditedIndekses++;
+                }
+                else
+                {
+                    if (indeks.Name != null && indeks.Name != "" && indeks.UnitOfMeasure != null && indeks.UnitOfMeasure != "" && indeks.Tc != null && indeks.Tc != "")
                     {
-                        listToEdit.Add(indeks);
-                    }
-                    else
-                    {
-                        listToAdd.Add(indeks);
+                        context.Indekses.Add(indeks);
+                        numberOfAddedIndekses++;
                     }
 
                 }
-
-                if (listToAdd.Count() > 0)
-                {
-                    context.Indekses.AddRange(listToAdd);
-                    context.SaveChanges();
-                    MessageBox.Show($"Dodano {listToAdd.Count} indeksów");
-                }
-                if (listToEdit.Count() > 0)
-                {
-                    context.Indekses.UpdateRange(listToEdit);
-                    context.SaveChanges();
-                    MessageBox.Show($"Zaktualizowano {listToEdit.Count} indeksów");
-                }
-
-                ListOfIndekses = context.Indekses.ToObservableCollection();
 
             }
-            catch (Exception ex)
+            if (numberOfEditedIndekses > 0 || numberOfAddedIndekses > 0)
             {
-                MessageBox.Show(ex.Message);
+                context.SaveChanges();
             }
+
+            MessageBox.Show($"Dodano {numberOfAddedIndekses} indeksów");
+            MessageBox.Show($"Zaktualizowano {numberOfEditedIndekses} indeksów");
+
         });
-
-
-        return ListOfIndekses;
+        
+        return GetAll();
     }
 
-    public ObservableCollection<Indeks> GetAll()
-    {
-        ObservableCollection<Indeks> ListOfIndekses;
-        ListOfIndekses = context.Indekses.ToObservableCollection();
-        return ListOfIndekses;
-    }
+    public ObservableCollection<Indeks>? GetAll() => context.Indekses.ToObservableCollection();
+    
 
     public void GoToBulkAddingIndeks()
     {

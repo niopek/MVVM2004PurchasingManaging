@@ -9,10 +9,10 @@ namespace MVVM2004PurchasingManaging.Interfaces;
 
 public interface IIndeksFormService
 {
-    ObservableCollection<Indeks> AddIndeks(Indeks newIndeks);
-    Task<ObservableCollection<Indeks>> AddOrEditManyIndeksAsync(List<Indeks> listOfIndeks);
-    ObservableCollection<Indeks> EditIndeks(Indeks IndeksToUpdate);
-    ObservableCollection<Indeks> RemoveIndeks(Indeks IndeksToRemove);
-    ObservableCollection<Indeks> GetAll();
+    Task<ObservableCollection<Indeks>?> AddIndeks(Indeks newIndeks);
+    Task<ObservableCollection<Indeks>?> AddOrEditManyIndeksAsync(List<Indeks> listOfIndeks);
+    Task<ObservableCollection<Indeks>?> EditIndeks(Indeks IndeksToUpdate);
+    Task<ObservableCollection<Indeks>?> RemoveIndeks(Indeks IndeksToRemove);
+    ObservableCollection<Indeks>? GetAll();
     void GoToBulkAddingIndeks();
 }
