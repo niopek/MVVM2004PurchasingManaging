@@ -36,7 +36,7 @@ public partial class PlantFormViewModel : ObservableObject
     public PlantFormViewModel(IPlantFormService plantFormService)
     {
         this.service = plantFormService;
-        ListOfPlants = service.GetAll();
+        //ListOfPlants = service.GetAll();
     }
 
     // FUNCTIONS

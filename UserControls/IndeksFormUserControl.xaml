@@ -168,7 +168,7 @@
                     Margin="1 2 1 2"
                     x:Name="ButtonMassUpdateIndeks"
                     Content="Masowka"
-                    Command="{Binding GoToBulkAddingIndeks}"/>
+                    Command="{Binding GoToBulkAddingIndeksCommand}"/>
 
         </Grid>
 

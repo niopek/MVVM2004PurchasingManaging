@@ -6,8 +6,8 @@ using System;
 using System.Windows.Input;
 
 namespace MVVM2004PurchasingManaging.ViewModel;
-[ObservableObject]
-public partial class MainWindowViewModel : IMainWindowViewModel
+
+public partial class MainWindowViewModel : ObservableObject, IMainWindowViewModel
 {
     // CTORS
     public MainWindowViewModel(IServiceProvider provider)

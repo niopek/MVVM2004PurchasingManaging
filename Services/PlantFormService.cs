@@ -14,12 +14,12 @@ namespace MVVM2004PurchasingManaging.Services;
 public class PlantFormService : IPlantFormService
 {
     private readonly MyDbContext context;
+    
 
     public PlantFormService(MyDbContext context)
     {
         this.context = context;
     }
-
 
     public async Task<ObservableCollection<Plant>> AddPlant(Plant newPlant)
     {
@@ -88,4 +88,6 @@ public class PlantFormService : IPlantFormService
         }
         return ListOfPlants.ToObservableCollection()!;
     }
+
+    
 }

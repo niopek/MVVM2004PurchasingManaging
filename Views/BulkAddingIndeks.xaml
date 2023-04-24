@@ -1,0 +1,179 @@
+﻿<Window x:Class="MVVM2004PurchasingManaging.Views.BulkAddingIndeks"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVM2004PurchasingManaging.Views"
+        xmlns:viewModel="clr-namespace:MVVM2004PurchasingManaging.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewModel:IndeksFormViewModel, IsDesignTimeCreatable=True}"
+        mc:Ignorable="d"
+        Title="BulkAddingIndeks" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Content="MASOWE DODAWANIE INDEKSOW"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Style="{StaticResource LabelTitle}"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Width="120"
+                      Margin="5"
+                      SelectedIndex="0"
+                      VerticalContentAlignment="Center"
+                      HorizontalContentAlignment="Center"
+                      FontSize="14"
+                      x:Name="ComboBoxDatabaseLoading">
+                <ComboBoxItem Content="EXCEL"/>
+                <ComboBoxItem Content="TXT"/>
+
+            </ComboBox>
+
+            <TextBox Grid.Column="1"
+                     Margin="0 5 5 5"
+                     Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalContentAlignment="Center"
+                     Padding="5 2 2 2"/>
+
+            <Button Grid.Column="2"
+                    Margin="5"
+                    Content="PRZEGLADAJ"
+                    Command="{Binding LoadFilePathCommand}"/>
+
+        </Grid>
+
+        <Button Grid.Row="2"
+                Margin="20 5 20 5"
+                Content="WCZYTAJ"
+                Command="{Binding LoadExcelCommand}"/>
+
+        <Grid Grid.Row="3"
+              Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="3"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Bottom"
+                   Style="{StaticResource LabelTitle}"
+                   Content="WZÓR PLIKU EXCEL"/>
+
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Bottom"
+                   Style="{StaticResource LabelTextBoxTitles}"
+                   FontSize="14"
+                   Content="ID"/>
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Bottom"
+                   Style="{StaticResource LabelTextBoxTitles}"
+                   FontSize="14"
+                   Content="NAZWA"/>
+            <Label Grid.Row="1"
+                   Grid.Column="2"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Bottom"
+                   Style="{StaticResource LabelTextBoxTitles}"
+                   FontSize="14"
+                   Content="OPIS"/>
+            <Label Grid.Row="1"
+                   Grid.Column="3"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Bottom"
+                   Style="{StaticResource LabelTextBoxTitles}"
+                   FontSize="14"
+                   Content="JEDNOSTKA MIARY"/>
+            <Label Grid.Row="1"
+                   Grid.Column="4"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Bottom"
+                   Style="{StaticResource LabelTextBoxTitles}"
+                   FontSize="14"
+                   Content="TC"/>
+
+            <StackPanel Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="5">
+
+                <Label Content="7000015"/>
+                <Label Content="7000016"/>
+                <Label Content="7000017"/>
+                <Label Content="7000018"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="5">
+
+                <Label Content="FALOWNIK ABC1"/>
+                <Label Content="LIMIT ZNAKOW 40"/>
+                <Label Content="INNA NAZWA"/>
+                <Label Content="LOŻYSKO SNR 1234"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="3"
+                        Grid.Column="2"
+                        Margin="5">
+
+                <Label Content="OPIS JEST ALBO NIE"/>
+                <Label Content=""/>
+                <Label Content="LIMIT ZNAKOW 100"/>
+                <Label Content="KULOWE"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="3"
+                        Grid.Column="3"
+                        Margin="5">
+
+                <Label Content="SZT"/>
+                <Label Content="OPK"/>
+                <Label Content="M"/>
+                <Label Content="KG"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="3"
+                        Grid.Column="4"
+                        Margin="5">
+
+                <Label Content="TC6"/>
+                <Label Content="TC4"/>
+                <Label Content="TC3"/>
+                <Label Content="TC1"/>
+
+            </StackPanel>
+        </Grid>
+
+
+    </Grid>
+</Window>

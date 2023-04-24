@@ -33,6 +33,7 @@ public partial class App : Application
                 services.AddSingleton<SearchViewModel>();
                 services.AddSingleton<IIndeksFormService, IndeksFormService>();
                 services.AddSingleton<IPlantFormService, PlantFormService>();
+                services.AddSingleton<INextWindowView, BulkAddingIndeks>();
             })
             .Build();
     }

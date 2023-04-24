@@ -8,6 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
+using MVVM2004PurchasingManaging.ViewModel;
+using Microsoft.EntityFrameworkCore.Metadata;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace MVVM2004PurchasingManaging.Services;
 
@@ -16,10 +21,13 @@ namespace MVVM2004PurchasingManaging.Services;
 public class IndeksFormService : IIndeksFormService
 {
     private readonly MyDbContext context;
-
-    public IndeksFormService(MyDbContext context)
+    private readonly IServiceProvider service;
+    private readonly INextWindowView view;
+    public IndeksFormService(MyDbContext context, IServiceProvider provider, INextWindowView view)
     {
         this.context = context;
+        this.service = provider;
+        this.view = view;
     }
     public ObservableCollection<Indeks> AddIndeks(Indeks newIndeks)
     {
@@ -133,11 +141,18 @@ public class IndeksFormService : IIndeksFormService
 
         return ListOfIndekses;
     }
+
     public ObservableCollection<Indeks> GetAll()
     {
         ObservableCollection<Indeks> ListOfIndekses;
         ListOfIndekses = context.Indekses.ToObservableCollection();
-
         return ListOfIndekses;
+    }
+
+    public void GoToBulkAddingIndeks()
+    {
+        var model = service.GetRequiredService<IndeksFormViewModel>();
+        view.Open(model);
+
     }
 }
