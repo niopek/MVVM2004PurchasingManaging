@@ -8,14 +8,13 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewModel:PlantFormViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="500" d:DesignWidth="770">
-    <Grid>
+    <Grid Margin="5 10 5 5">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0"
-              Margin="5"
               >
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"/>
@@ -92,7 +91,7 @@
         <DataGrid AutoGenerateColumns="False"
                   x:Name="DataGridPlant"
                   Grid.Row="1"
-                  Margin="5"
+                  Margin="10 0 2 0"
                   ItemsSource="{Binding ListOfPlants, UpdateSourceTrigger=PropertyChanged}"
                   Style="{StaticResource DataGridStyle}"
                   ColumnHeaderStyle="{StaticResource DataGridColumnStyle}"

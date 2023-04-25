@@ -10,7 +10,7 @@
              x:Name="IndeksFormUC"
              d:DesignHeight="500" d:DesignWidth="770">
 
-    <Grid>
+    <Grid Margin="5 10 5 5">
         <Grid.RowDefinitions>
             <RowDefinition Height="170"/>
             <RowDefinition Height="*"/>
@@ -121,13 +121,6 @@
                      Margin="2"
                      Style="{StaticResource TextBoxForms}"
                      Text="{Binding Tc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-
-
-
-
-
-
 
         </Grid>
 
