@@ -8,6 +8,8 @@ public class MyDbContext : DbContext
     public DbSet<Indeks> Indekses { get; set; }
     public DbSet<Plant> Plants { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<IndeksPriceRecord> IndeksPriceRecords { get; set; }
+    public DbSet<Order> Orders { get; set; }
     public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
     {
 

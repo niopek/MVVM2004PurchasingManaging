@@ -9,6 +9,72 @@
              d:DataContext="{d:DesignInstance Type=viewModel:SearchViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="{Binding testText}"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox HorizontalContentAlignment="Center" 
+                      VerticalContentAlignment="Center" 
+                      Margin="5 5 2.5 5"
+                      FontSize="18"
+                      Grid.Column="0">
+                <ComboBoxItem Content="INDEKS" 
+                              IsSelected="True"/>
+                <ComboBoxItem Content="NAZWA" 
+                              IsSelected="{Binding IsFindByNameChecked, Mode=TwoWay}"/>
+            </ComboBox>
+
+            <TextBox Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     VerticalContentAlignment="Center"
+                     Margin="2.5 5 2.5 5"
+                     AcceptsTab="True"
+                     AcceptsReturn="True"
+                     Grid.Column="1"/>
+
+            <Button Content="WCZYTAJ" 
+                    Command="{Binding ShowListOfIndeksesCommand}"
+                    Margin="2.5 5 5 5"
+                    Grid.Column="2"/>
+
+
+        </Grid>
+
+
+
+        <DataGrid Grid.Row="2" 
+                  ItemsSource="{Binding ListOfIndekses}"
+                  Style="{StaticResource DataGridStyle}"
+                  ColumnHeaderStyle="{StaticResource DataGridColumnStyle}"
+                  CellStyle="{StaticResource   DataGridCellStyleFS12P5}"
+                  Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="INDEKS" 
+                                    Width="2.5*"
+                                    Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="NAZWA" 
+                                    Width="4*"
+                                    Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="OPIS"
+                                    Width="4*"
+                                    Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="JM" 
+                                    Width="1*"
+                                    Binding="{Binding UnitOfMeasure}"/>
+                <DataGridTextColumn Header="TC" 
+                                    Width="1*"
+                                    Binding="{Binding Tc}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
     </Grid>
 </UserControl>

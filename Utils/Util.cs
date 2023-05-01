@@ -17,19 +17,22 @@ public static class Util
             {
                 tempString += c;
 
-                if (tempString.Length == 7)
-                {
-                    list.Add(int.Parse(tempString));
-                    tempString = "";
-                }
             }
             else
             {
+                if(tempString.Length > 0)
+                {
+                    list.Add(int.Parse(tempString));
+                }
                 tempString = "";
             }
 
+            
         }
-
+        if(tempString.Length > 0)
+        {
+            list.Add(int.Parse(tempString));
+        }
         return list;
     }
 

@@ -31,10 +31,12 @@ public partial class App : Application
                 services.AddSingleton<SupplierFormViewModel>();
                 services.AddSingleton<PlantFormViewModel>();
                 services.AddSingleton<SearchViewModel>();
+                services.AddSingleton<IHomeViewService, HomeViewService>();
                 services.AddSingleton<IIndeksFormService, IndeksFormService>();
                 services.AddSingleton<ISupplierFormService, SupplierFormService>();
                 services.AddSingleton<IPlantFormService, PlantFormService>();
                 services.AddSingleton<INextWindowView, BulkAddingIndeks>();
+                services.AddSingleton<ISeachService, SeachService>();
             })
             .Build();
     }
