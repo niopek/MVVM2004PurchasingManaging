@@ -23,7 +23,7 @@ public partial class App : Application
             {
                 services.AddDbContext<MyDbContext>(options => 
                 options.UseSqlServer("Server=tcp:niopekdatabase.database.windows.net,1433;Initial Catalog=MVVManagingApp;Persist Security Info=False;User ID=niopek;Password=Qo2esdbaf;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
-
+                
                 services.AddSingleton<MainWindow>();
                 services.AddSingleton<IMainWindowViewModel, MainWindowViewModel>();
                 services.AddSingleton<HomeViewModel>();
