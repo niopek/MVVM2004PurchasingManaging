@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MVVM2004PurchasingManaging.ViewModel"
              xmlns:uc="clr-namespace:MVVM2004PurchasingManaging.UserControls"
-             ShutdownMode="OnMainWindowClose">
+             ShutdownMode="OnMainWindowClose" 
+             >
     <Application.Resources>
         <DataTemplate DataType="{x:Type local:HomeViewModel}">
             <uc:HomeUserControl />

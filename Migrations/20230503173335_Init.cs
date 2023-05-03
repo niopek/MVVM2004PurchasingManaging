@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MVVM2004PurchasingManaging.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -64,19 +64,67 @@ namespace MVVM2004PurchasingManaging.Migrations
                 {
                     table.PrimaryKey("PK_Suppliers", x => x.SupplierId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "IndeksPriceRecords",
+                columns: table => new
+                {
+                    IndeksId = table.Column<int>(type: "int", nullable: false),
+                    SupplierId = table.Column<int>(type: "int", nullable: false),
+                    PlantId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Currency = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IndeksPriceRecords", x => new { x.IndeksId, x.SupplierId, x.PlantId });
+                    table.ForeignKey(
+                        name: "FK_IndeksPriceRecords_Indekses_IndeksId",
+                        column: x => x.IndeksId,
+                        principalTable: "Indekses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_IndeksPriceRecords_Plants_PlantId",
+                        column: x => x.PlantId,
+                        principalTable: "Plants",
+                        principalColumn: "PlantId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_IndeksPriceRecords_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "Suppliers",
+                        principalColumn: "SupplierId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IndeksPriceRecords_PlantId",
+                table: "IndeksPriceRecords",
+                column: "PlantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IndeksPriceRecords_SupplierId",
+                table: "IndeksPriceRecords",
+                column: "SupplierId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "IndeksPriceRecords");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
+
+            migrationBuilder.DropTable(
                 name: "Indekses");
 
             migrationBuilder.DropTable(
                 name: "Plants");
-
-            migrationBuilder.DropTable(
-                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "Suppliers");

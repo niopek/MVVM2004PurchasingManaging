@@ -47,6 +47,39 @@ namespace MVVM2004PurchasingManaging.Migrations
                     b.ToTable("Indekses");
                 });
 
+            modelBuilder.Entity("MVVM2004PurchasingManaging.Entities.IndeksPriceRecord", b =>
+                {
+                    b.Property<int>("IndeksId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlantId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IndeksId", "SupplierId", "PlantId");
+
+                    b.HasIndex("PlantId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("IndeksPriceRecords");
+                });
+
             modelBuilder.Entity("MVVM2004PurchasingManaging.Entities.Plant", b =>
                 {
                     b.Property<int>("PlantId")
@@ -98,6 +131,48 @@ namespace MVVM2004PurchasingManaging.Migrations
                     b.HasKey("SupplierId");
 
                     b.ToTable("Suppliers");
+                });
+
+            modelBuilder.Entity("MVVM2004PurchasingManaging.Entities.IndeksPriceRecord", b =>
+                {
+                    b.HasOne("MVVM2004PurchasingManaging.Entities.Indeks", "Indeks")
+                        .WithMany("IndeksPriceRecords")
+                        .HasForeignKey("IndeksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVVM2004PurchasingManaging.Entities.Plant", "Plant")
+                        .WithMany("IndeksPriceRecords")
+                        .HasForeignKey("PlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVVM2004PurchasingManaging.Entities.Supplier", "Supplier")
+                        .WithMany("IndeksPriceRecords")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Indeks");
+
+                    b.Navigation("Plant");
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("MVVM2004PurchasingManaging.Entities.Indeks", b =>
+                {
+                    b.Navigation("IndeksPriceRecords");
+                });
+
+            modelBuilder.Entity("MVVM2004PurchasingManaging.Entities.Plant", b =>
+                {
+                    b.Navigation("IndeksPriceRecords");
+                });
+
+            modelBuilder.Entity("MVVM2004PurchasingManaging.Entities.Supplier", b =>
+                {
+                    b.Navigation("IndeksPriceRecords");
                 });
 #pragma warning restore 612, 618
         }
