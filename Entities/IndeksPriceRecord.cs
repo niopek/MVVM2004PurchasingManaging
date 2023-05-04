@@ -25,6 +25,25 @@ namespace MVVM2004PurchasingManaging.Entities
         public Supplier Supplier { get; set; }
         public Plant Plant { get; set; }
 
-       
+        public static void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<IndeksPriceRecord>()
+                .HasKey(pr => new { pr.IndeksId, pr.SupplierId, pr.PlantId });
+
+            modelBuilder.Entity<IndeksPriceRecord>()
+                .HasOne(pr => pr.Indeks)
+                .WithMany(ind => ind.IndeksPriceRecords)
+                .HasForeignKey(pr => pr.IndeksId);
+
+            modelBuilder.Entity<IndeksPriceRecord>()
+                .HasOne(pr => pr.Supplier)
+                .WithMany(sup => sup.IndeksPriceRecords)
+                .HasForeignKey(pr => pr.SupplierId);
+
+            modelBuilder.Entity<IndeksPriceRecord>()
+                .HasOne(pr => pr.Plant)
+                .WithMany(pla => pla.IndeksPriceRecords)
+                .HasForeignKey(pr => pr.PlantId);
+        }
     }
 }

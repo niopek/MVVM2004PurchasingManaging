@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using MVVM2004PurchasingManaging.Interfaces;
 using System;
-using System.Windows.Input;
 
 namespace MVVM2004PurchasingManaging.ViewModel;
 

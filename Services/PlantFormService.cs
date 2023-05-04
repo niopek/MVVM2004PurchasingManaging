@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MVVM2004PurchasingManaging.Entities;
+﻿using MVVM2004PurchasingManaging.Entities;
 using MVVM2004PurchasingManaging.Interfaces;
 using MVVM2004PurchasingManaging.Utils;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;

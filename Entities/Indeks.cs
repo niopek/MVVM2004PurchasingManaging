@@ -16,5 +16,11 @@ public class Indeks : IIndeksName
     public string UnitOfMeasure { get; set; }
     public string Tc { get; set; }
     public List<IndeksPriceRecord> IndeksPriceRecords { get; set; }
-
+    public static void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Indeks>()
+            .HasMany(i => i.IndeksPriceRecords)
+            .WithOne(pr => pr.Indeks)
+            .HasForeignKey(pr => pr.IndeksId);
+    }
 }

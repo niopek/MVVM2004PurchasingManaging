@@ -13,5 +13,11 @@ public class Supplier
     public string SupplierName { get; set; }
     public List<IndeksPriceRecord> IndeksPriceRecords { get; set; }
 
-   
+    public static void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Supplier>()
+            .HasMany(s => s.IndeksPriceRecords)
+            .WithOne(pr => pr.Supplier)
+            .HasForeignKey(pr => pr.SupplierId);
+    }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace MVVM2004PurchasingManaging.Utils;
 
@@ -7,13 +9,22 @@ public static class ExtensionsMethods
 {
     public static ObservableCollection<T>? ToObservableCollection<T>(this IEnumerable<T> enumerableList)
     {
-        if (enumerableList != null)
+        try
         {
-            var observableCollection = new ObservableCollection<T>(enumerableList);
+            if (enumerableList != null)
+            {
+                var observableCollection = new ObservableCollection<T>(enumerableList);
 
-            return observableCollection;
+                return observableCollection;
+            }
+
         }
-        return null;
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+
+        return new();
     }
 
 

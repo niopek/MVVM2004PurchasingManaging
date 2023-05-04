@@ -1,12 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using MVVM2004PurchasingManaging.Entities;
 using MVVM2004PurchasingManaging.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace MVVM2004PurchasingManaging.ViewModel;

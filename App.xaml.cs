@@ -24,19 +24,19 @@ public partial class App : Application
                 services.AddDbContext<MyDbContext>(options => 
                 options.UseSqlServer("Server=tcp:niopekdatabase.database.windows.net,1433;Initial Catalog=MVVManagingApp;Persist Security Info=False;User ID=niopek;Password=Qo2esdbaf;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
                 
-                services.AddScoped<MainWindow>();
-                services.AddScoped<IMainWindowViewModel, MainWindowViewModel>();
-                services.AddScoped<HomeViewModel>();
-                services.AddScoped<IndeksFormViewModel>();
-                services.AddScoped<SupplierFormViewModel>();
-                services.AddScoped<PlantFormViewModel>();
-                services.AddScoped<SearchViewModel>();
-                services.AddScoped<IHomeViewService, HomeViewService>();
-                services.AddScoped<IIndeksFormService, IndeksFormService>();
-                services.AddScoped<ISupplierFormService, SupplierFormService>();
-                services.AddScoped<IPlantFormService, PlantFormService>();
-                services.AddScoped<INextWindowView, BulkAddingIndeks>();
-                services.AddScoped<ISeachService, SeachService>();
+                services.AddSingleton<MainWindow>();
+                services.AddSingleton<IMainWindowViewModel, MainWindowViewModel>();
+                services.AddSingleton<HomeViewModel>();
+                services.AddSingleton<IndeksFormViewModel>();
+                services.AddSingleton<SupplierFormViewModel>();
+                services.AddSingleton<PlantFormViewModel>();
+                services.AddSingleton<SearchViewModel>();
+                services.AddSingleton<IHomeViewService, HomeViewService>();
+                services.AddSingleton<IIndeksFormService, IndeksFormService>();
+                services.AddSingleton<ISupplierFormService, SupplierFormService>();
+                services.AddSingleton<IPlantFormService, PlantFormService>();
+                services.AddSingleton<INextWindowView, BulkAddingIndeks>();
+                services.AddSingleton<ISeachService, SeachService>();
             })
             .Build();
     }

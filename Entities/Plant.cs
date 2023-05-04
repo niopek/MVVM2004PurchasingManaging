@@ -13,5 +13,11 @@ public class Plant
     public string Name { get; set; }
     public List<IndeksPriceRecord> IndeksPriceRecords { get; set; }
 
-    
+    public static void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Plant>()
+            .HasMany(p => p.IndeksPriceRecords)
+            .WithOne(pr => pr.Plant)
+            .HasForeignKey(pr => pr.PlantId);
+    }
 }

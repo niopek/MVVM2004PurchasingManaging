@@ -1,22 +1,16 @@
-﻿using MVVM2004PurchasingManaging.Entities;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MVVM2004PurchasingManaging.Entities;
 using MVVM2004PurchasingManaging.Interfaces;
 using MVVM2004PurchasingManaging.Utils;
+using MVVM2004PurchasingManaging.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.Extensions.DependencyInjection;
-using MVVM2004PurchasingManaging.ViewModel;
-using Microsoft.EntityFrameworkCore.Metadata;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace MVVM2004PurchasingManaging.Services;
-
-
 
 public class IndeksFormService : IIndeksFormService
 {

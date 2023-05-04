@@ -1,19 +1,15 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MVVM2004PurchasingManaging.Entities;
+using MVVM2004PurchasingManaging.Interfaces;
+using MVVM2004PurchasingManaging.Services;
 using MVVM2004PurchasingManaging.Utils;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
-using MVVM2004PurchasingManaging.Interfaces;
 using System.Linq;
-using MVVM2004PurchasingManaging.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace MVVM2004PurchasingManaging.ViewModel;
 
