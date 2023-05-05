@@ -19,5 +19,12 @@ public class Plant
             .HasMany(p => p.IndeksPriceRecords)
             .WithOne(pr => pr.Plant)
             .HasForeignKey(pr => pr.PlantId);
+
+        modelBuilder.Entity<Plant>(entity =>
+        {
+            entity.Property(p => p.Name)
+            .IsRequired()
+            .HasMaxLength(40);
+        });
     }
 }

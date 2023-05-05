@@ -19,5 +19,12 @@ public class Supplier
             .HasMany(s => s.IndeksPriceRecords)
             .WithOne(pr => pr.Supplier)
             .HasForeignKey(pr => pr.SupplierId);
+
+        modelBuilder.Entity<Supplier>(entity =>
+        {
+            entity.Property(p => p.SupplierName)
+            .IsRequired()
+            .HasMaxLength(40);
+        });
     }
 }

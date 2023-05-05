@@ -22,5 +22,21 @@ public class Indeks : IIndeksName
             .HasMany(i => i.IndeksPriceRecords)
             .WithOne(pr => pr.Indeks)
             .HasForeignKey(pr => pr.IndeksId);
+
+        modelBuilder.Entity<Indeks>(entity =>
+        {
+            entity.Property(e => e.Name)
+            .IsRequired()
+            .HasMaxLength(40);
+
+            entity.Property(e => e.Description)
+            .HasMaxLength(200);
+
+            entity.Property(e => e.UnitOfMeasure)
+            .IsRequired();
+
+            entity.Property(e => e.Tc)
+            .IsRequired();
+        });
     }
 }

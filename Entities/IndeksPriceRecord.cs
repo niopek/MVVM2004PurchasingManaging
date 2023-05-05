@@ -44,6 +44,20 @@ namespace MVVM2004PurchasingManaging.Entities
                 .HasOne(pr => pr.Plant)
                 .WithMany(pla => pla.IndeksPriceRecords)
                 .HasForeignKey(pr => pr.PlantId);
+
+            modelBuilder.Entity<IndeksPriceRecord>(entity =>
+            {
+                entity.Property(pr => pr.Price)
+                .IsRequired()
+                .HasPrecision(18, 2);
+
+                entity.Property(pr => pr.Amount)
+                .IsRequired()
+                .HasPrecision(18, 2);
+
+                entity.Property(pr => pr.Currency)
+                .IsRequired();
+            });
         }
     }
 }
