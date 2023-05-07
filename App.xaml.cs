@@ -31,12 +31,14 @@ public partial class App : Application
                 services.AddScoped<SupplierFormViewModel>();
                 services.AddScoped<PlantFormViewModel>();
                 services.AddScoped<SearchViewModel>();
+                services.AddScoped<PriceRecordsViewModel>();
                 services.AddScoped<IHomeViewService, HomeViewService>();
                 services.AddScoped<IIndeksFormService, IndeksFormService>();
                 services.AddScoped<ISupplierFormService, SupplierFormService>();
                 services.AddScoped<IPlantFormService, PlantFormService>();
                 services.AddScoped<INextWindowView, BulkAddingIndeks>();
                 services.AddScoped<ISeachService, SeachService>();
+                services.AddScoped<IPriceRecordsFormService, PriceRecordService>();
             })
             .Build();
     }

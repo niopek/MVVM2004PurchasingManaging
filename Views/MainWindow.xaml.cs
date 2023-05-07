@@ -71,6 +71,11 @@ public partial class MainWindow : Window
         SetNavMenuColorToNomral();
         SearchNav.Background = _colorBrush;
     }
+    private void PriceRecordsNav_Click(object sender, RoutedEventArgs e)
+    {
+        SetNavMenuColorToNomral();
+        PriceRecordsNav.Background = _colorBrush;
+    }
 
 
 
@@ -82,6 +87,7 @@ public partial class MainWindow : Window
         SupplierFormNav.Background = color;
         PlantFormNav.Background = color;
         SearchNav.Background = color;
+        PriceRecordsNav.Background = color;
     }
 
 

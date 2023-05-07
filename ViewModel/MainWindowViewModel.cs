@@ -46,6 +46,9 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
     
     [RelayCommand]
     public void GoToSearchUC() =>
-        CurrentViewModel = _serviceProvider.GetRequiredService<SearchViewModel>(); 
-    
+        CurrentViewModel = _serviceProvider.GetRequiredService<SearchViewModel>();
+    [RelayCommand]
+    public void GoToIndeksPriceRecordsUC() =>
+        CurrentViewModel = _serviceProvider.GetRequiredService<PriceRecordsViewModel>();
+
 }

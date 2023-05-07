@@ -9,5 +9,6 @@ public interface IMainWindowViewModel
     void GoToIndeksFormUC();
     void GoToPlantFormUC();
     void GoToSearchUC();
-    void GoToSupplierFormUC(); 
+    void GoToSupplierFormUC();
+    void GoToIndeksPriceRecordsUC();
 }

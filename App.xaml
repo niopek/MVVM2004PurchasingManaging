@@ -21,6 +21,9 @@
         <DataTemplate DataType="{x:Type local:SearchViewModel}">
             <uc:SearchUserControl/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:PriceRecordsViewModel}">
+            <uc:PriceRecordsUserControl/>
+        </DataTemplate>
 
 
 

@@ -14,7 +14,6 @@ namespace MVVM2004PurchasingManaging.Entities
         public int Id { get; set; }
         public decimal Price { get; set; }
         public string Currency { get; set; }
-        public decimal Amount { get; set; }
 
         // keys
         public int IndeksId { get; set; }
@@ -48,10 +47,6 @@ namespace MVVM2004PurchasingManaging.Entities
             modelBuilder.Entity<IndeksPriceRecord>(entity =>
             {
                 entity.Property(pr => pr.Price)
-                .IsRequired()
-                .HasPrecision(18, 2);
-
-                entity.Property(pr => pr.Amount)
                 .IsRequired()
                 .HasPrecision(18, 2);
 
