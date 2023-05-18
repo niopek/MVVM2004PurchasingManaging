@@ -1,0 +1,186 @@
+﻿<UserControl x:Class="MVVM2004PurchasingManaging.UserControls.OrderUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVM2004PurchasingManaging.UserControls"
+             xmlns:viewModel="clr-namespace:MVVM2004PurchasingManaging.ViewModel"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewModel:OrderViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="500" d:DesignWidth="770">
+    <Grid Margin="5 10 5 5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Margin="0 0 90 0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="ZARZADZANIE ZAMOWIENIAMI"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="4"
+                   FontSize="18"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Top"
+                   Margin="0 -5 0 0"
+                   Style="{StaticResource LabelTitle}"/>
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource TextBlockText}"/>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource TextBlockText}"/>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="2"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource TextBlockText}"/>
+
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Content="IndeksId"
+                   Style="{StaticResource LabelTextBoxTitles}"/>
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Content="SupplierId"
+                   Style="{StaticResource LabelTextBoxTitles}"/>
+
+            <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Content="PlantId"
+                   Style="{StaticResource LabelTextBoxTitles}"/>
+
+            <Grid Grid.Row="2"
+                  Grid.Column="1">
+                <Grid.ColumnDefinitions
+                    >
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Ilość"
+                       Grid.Column="0"
+                       Style="{StaticResource LabelTextBoxTitles}"/>
+                
+
+            </Grid>
+
+
+            <TextBox Grid.Row="3"
+                     Grid.Column="0"
+                     Style="{StaticResource TextBoxForms}"
+                     Margin="8"
+                     Text="{Binding IndeksId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="1"
+                     Grid.Column="0"
+                     Style="{StaticResource TextBoxForms}"
+                     Margin="8"
+                     Text="{Binding SupplierId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="1"
+                     Grid.Column="3"
+                     Style="{StaticResource TextBoxForms}"
+                     Margin="8"
+                     Text="{Binding PlantId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Grid Grid.Row="3"
+                  Grid.Column="1">
+                <Grid.ColumnDefinitions
+                    >
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         Style="{StaticResource TextBoxForms}"
+                         Margin="3 8 3 8"
+                         Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                
+
+            </Grid>
+
+
+        </Grid>
+
+        <Grid Grid.Row="0"
+              HorizontalAlignment="Right"
+              Margin="0 0 2 0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="2"
+                    Margin="1 2 1 2"
+                    x:Name="ButtonAddIndeks"
+                    Content="Dodaj"
+                    Command="{Binding AddOrderPriceRecordCommand}"/>
+
+            <Button Grid.Row="3"
+                    Margin="1 2 1 2"
+                    x:Name="ButtonRemoveIndeks"
+                    Content="Usun"
+                    Command="{Binding DeleteOrderPriceRecordCommand}"/>
+
+        </Grid>
+
+
+        <DataGrid x:Name="DataGridIndeks"
+                  Grid.Row="1"
+                  Margin="2"
+                  ItemsSource="{Binding ListOfOrderPriceRecords, NotifyOnSourceUpdated=True}" 
+                  Style="{StaticResource DataGridStyle}"
+                  ColumnHeaderStyle="{StaticResource DataGridColumnStyle}"
+                  CellStyle="{StaticResource DataGridCellStyleFS12P5}"
+                  >
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="INDEKS ID"
+                                    Binding="{Binding IndeksId}"
+                                    MinWidth="150"
+                                    />
+
+                <DataGridTextColumn Header="SUPPLIER ID" 
+                                    Binding="{Binding SupplierId}"
+                                    MinWidth="150"/>
+
+                <DataGridTextColumn Header="PLANT ID" 
+                                    Binding="{Binding PlantId}"
+                                    MinWidth="150"/>
+
+                <DataGridTextColumn Header="AMOUNT" 
+                                    Binding="{Binding OrderPriceRecord.pri}"
+                                    MinWidth="150"
+                                    />
+
+                <DataGridTextColumn Header="PRICE" 
+                                    Binding="{Binding Currency}"
+                                    MinWidth="150"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

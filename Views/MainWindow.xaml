@@ -87,6 +87,7 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
             
             <Image Source="../Images/icons-img.png"
@@ -256,6 +257,36 @@
                     FontSize="20"
                     FontWeight="Bold"
                     Click="PriceRecordsNav_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="10 5 10 5">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/icons-search.png" 
+                                       Width="40" 
+                                       Height="40" />
+                                <ContentPresenter Width="160"
+                                                  Margin="5"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!---  ORDER NAV   -->
+            <Button Command="{Binding GoToOrderUCCommand}"
+                    Content="ORDERS"
+                    Grid.Row="7"
+                    x:Name="OrdersNav"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Click="OrdersNav_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" 

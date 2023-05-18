@@ -11,7 +11,6 @@ namespace MVVM2004PurchasingManaging.Entities
 {
     public class IndeksPriceRecord
     {
-        public int Id { get; set; }
         public decimal Price { get; set; }
         public string Currency { get; set; }
 
@@ -27,7 +26,7 @@ namespace MVVM2004PurchasingManaging.Entities
         public static void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IndeksPriceRecord>()
-                .HasKey(pr => new { pr.IndeksId, pr.SupplierId, pr.PlantId });
+                .HasKey(pr => new {pr.IndeksId, pr.SupplierId, pr.PlantId});
 
             modelBuilder.Entity<IndeksPriceRecord>()
                 .HasOne(pr => pr.Indeks)

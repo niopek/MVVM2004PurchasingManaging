@@ -9,6 +9,8 @@ public class MyDbContext : DbContext
     public DbSet<Plant> Plants { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }
     public DbSet<IndeksPriceRecord> IndeksPriceRecords { get; set; }
+    public DbSet<OrderPriceRecord> OrderPriceRecords { get; set; }
+    public DbSet<OrderRecord> OrderRecords { get; set; }
     public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
     {
 
@@ -20,6 +22,9 @@ public class MyDbContext : DbContext
         Supplier.OnModelCreating(modelBuilder);
         Plant.OnModelCreating(modelBuilder);
         IndeksPriceRecord.OnModelCreating(modelBuilder);
+        OrderPriceRecord.OnModelCreating(modelBuilder);
+        OrderRecord.OnModelCreating(modelBuilder);
+         
     }
 
 }

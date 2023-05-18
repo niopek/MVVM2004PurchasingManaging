@@ -32,6 +32,7 @@ public partial class App : Application
                 services.AddScoped<PlantFormViewModel>();
                 services.AddScoped<SearchViewModel>();
                 services.AddScoped<PriceRecordsViewModel>();
+                services.AddScoped<OrderViewModel>();
                 services.AddScoped<IHomeViewService, HomeViewService>();
                 services.AddScoped<IIndeksFormService, IndeksFormService>();
                 services.AddScoped<ISupplierFormService, SupplierFormService>();
@@ -39,6 +40,7 @@ public partial class App : Application
                 services.AddScoped<INextWindowView, BulkAddingIndeks>();
                 services.AddScoped<ISeachService, SeachService>();
                 services.AddScoped<IPriceRecordsFormService, PriceRecordService>();
+                services.AddScoped<IOrderService, OrderService>();
             })
             .Build();
     }
