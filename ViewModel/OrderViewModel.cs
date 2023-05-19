@@ -39,7 +39,7 @@ public partial class OrderViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async void AddOrderPriceRecord()
+    private void AddOrderPriceRecord()
     {
         var indeksId = IndeksId;
         var supplierId = SupplierId;
