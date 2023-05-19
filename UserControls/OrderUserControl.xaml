@@ -172,12 +172,16 @@
                                     MinWidth="150"/>
 
                 <DataGridTextColumn Header="AMOUNT" 
-                                    Binding="{Binding OrderPriceRecord.pri}"
-                                    MinWidth="150"
+                                    Binding="{Binding Amount}"
+                                    MinWidth="100"
                                     />
 
                 <DataGridTextColumn Header="PRICE" 
-                                    Binding="{Binding Currency}"
+                                    Binding="{Binding IndeksPriceRecord.Price}"
+                                    MinWidth="100"/>
+                
+                <DataGridTextColumn Header="TOTAL PRICE" 
+                                    Binding="{Binding TotalIndeksPrice}"
                                     MinWidth="150"/>
 
             </DataGrid.Columns>

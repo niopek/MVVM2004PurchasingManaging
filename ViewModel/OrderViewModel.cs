@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MVVM2004PurchasingManaging.Entities;
 using MVVM2004PurchasingManaging.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,7 @@ public partial class OrderViewModel : ObservableObject
 {
     private readonly IOrderService service;
     [ObservableProperty]
-    private List<OrderPriceRecord> _listOfOrderPriceRecords = new();
+    private ObservableCollection<OrderPriceRecord> _listOfOrderPriceRecords = new();
     [ObservableProperty]
     private int _indeksId;
     [ObservableProperty]
@@ -33,10 +35,21 @@ public partial class OrderViewModel : ObservableObject
     public OrderViewModel(IOrderService service)
     {
         this.service = service;
+        ListOfOrderPriceRecords = service.GetAll();
     }
 
+    [RelayCommand]
+    private async void AddOrderPriceRecord()
+    {
+        var indeksId = IndeksId;
+        var supplierId = SupplierId;
+        var plantId = PlantId;
+        var amount = Amount;
 
+        service.AddOrderPriceRecord(indeksId, supplierId, plantId, amount);
+        ListOfOrderPriceRecords = service.GetAll();
 
+    }
 
 }
 
