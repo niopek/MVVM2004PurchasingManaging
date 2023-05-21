@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewModel:OrderViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="500" d:DesignWidth="770">
+    
     <Grid Margin="5 10 5 5">
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
@@ -165,11 +166,11 @@
 
                 <DataGridTextColumn Header="SUPPLIER ID" 
                                     Binding="{Binding SupplierId}"
-                                    MinWidth="150"/>
+                                    MinWidth="100"/>
 
                 <DataGridTextColumn Header="PLANT ID" 
                                     Binding="{Binding PlantId}"
-                                    MinWidth="150"/>
+                                    MinWidth="100"/>
 
                 <DataGridTextColumn Header="AMOUNT" 
                                     Binding="{Binding Amount}"
@@ -182,8 +183,16 @@
                 
                 <DataGridTextColumn Header="TOTAL PRICE" 
                                     Binding="{Binding TotalIndeksPrice}"
-                                    MinWidth="150"/>
-
+                                    MinWidth="100"/>
+                <DataGridTemplateColumn Header="Usuń">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Button Content="Delete Record" Command="{Binding Path=DataContext.DeleteOrderPriceRecordCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

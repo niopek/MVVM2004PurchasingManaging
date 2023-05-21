@@ -1,4 +1,5 @@
-﻿using MVVM2004PurchasingManaging.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MVVM2004PurchasingManaging.Entities;
 using MVVM2004PurchasingManaging.Interfaces;
 using MVVM2004PurchasingManaging.Utils;
 using System;
@@ -39,9 +40,19 @@ namespace MVVM2004PurchasingManaging.Services
 
         }
 
+        public void DeleteOrderPriceRecord(OrderPriceRecord record)
+        {
+            context.OrderPriceRecords.Remove(record);
+            context.SaveChanges();
+        }
+
         public ObservableCollection<OrderPriceRecord> GetAll()
         {
-            return context.OrderPriceRecords.ToObservableCollection();
+            var orderPriceRecords = context.OrderPriceRecords
+                .Include(opr => opr.IndeksPriceRecord)
+                .ToList();
+
+            return orderPriceRecords.ToObservableCollection();
         }
     }
 }

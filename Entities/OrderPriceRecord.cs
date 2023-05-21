@@ -15,7 +15,14 @@ public class OrderPriceRecord
     public int PlantId { get; set; }
     public IndeksPriceRecord IndeksPriceRecord { get; set; }
     public decimal Amount { get; set; }
-    public decimal TotalIndeksPrice { get { return Amount * this.IndeksPriceRecord.Price; } }
+    public decimal TotalIndeksPrice
+    {
+        get
+        {
+            if (IndeksPriceRecord != null) { return Amount * this.IndeksPriceRecord.Price; }
+            else { return 0; }
+        }
+    }
     public List<OrderRecord> OrderRecords { get; set; }
 
     public static void OnModelCreating(ModelBuilder modelBuilder)

@@ -11,5 +11,6 @@ namespace MVVM2004PurchasingManaging.Interfaces;
 public interface IOrderService
 {
     void AddOrderPriceRecord(int indeksId, int supplierId, int plantId, decimal amount);
+    void DeleteOrderPriceRecord(OrderPriceRecord record);
     ObservableCollection<OrderPriceRecord> GetAll();
 }

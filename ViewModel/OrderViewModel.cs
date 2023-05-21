@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MVVM2004PurchasingManaging.Entities;
 using MVVM2004PurchasingManaging.Interfaces;
 using System;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MVVM2004PurchasingManaging.ViewModel;
 
@@ -48,6 +50,19 @@ public partial class OrderViewModel : ObservableObject
 
         service.AddOrderPriceRecord(indeksId, supplierId, plantId, amount);
         ListOfOrderPriceRecords = service.GetAll();
+
+    }
+    [RelayCommand]
+    private void DeleteOrderPriceRecord(object parameter)
+    {
+        Task.Run(() => {
+            if (parameter is OrderPriceRecord record)
+            {
+                service.DeleteOrderPriceRecord(record);
+                ListOfOrderPriceRecords = service.GetAll();
+            }
+        });
+        
 
     }
 
