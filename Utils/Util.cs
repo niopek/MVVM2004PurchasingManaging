@@ -5,6 +5,7 @@ namespace MVVM2004PurchasingManaging.Utils;
 
 public static class Util
 {
+    public static string ConnectionString = "";
     public static List<int> FindIndeksFromText(string text)
     {
         List<int> list = new();

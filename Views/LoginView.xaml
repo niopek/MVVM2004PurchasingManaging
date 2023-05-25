@@ -1,0 +1,69 @@
+﻿<Window x:Class="MVVM2004PurchasingManaging.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVM2004PurchasingManaging.Views"
+        xmlns:viewmodel="clr-namespace:MVVM2004PurchasingManaging.ViewModel" xmlns:customcontrols="clr-namespace:MVVM2004PurchasingManaging.CustomControls"
+        d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
+        mc:Ignorable="d"
+        Title="LoginView" Height="320" Width="300">
+    
+    <Grid>
+        <StackPanel>
+            <Label Content="LOGOWANIE" 
+                   HorizontalContentAlignment="Center"
+                   Style="{StaticResource LabelTitle}"
+                   Padding="10"/>
+
+            <Label Content="NAZWA UŻYTKOWNIKA" 
+                   HorizontalContentAlignment="Center"
+                   Style="{StaticResource LabelTextBoxTitles}"
+                   Padding="10"/>
+
+            <TextBox Height="40" 
+                     Style="{StaticResource TextBoxForms}"
+                     Padding="5"
+                     Margin="5"
+                     Text="{Binding UserName}"/>
+
+
+            <Label Content="HASŁO" 
+                   HorizontalContentAlignment="Center"
+                   Style="{StaticResource LabelTextBoxTitles}"
+                   Padding="10"/>
+
+            
+
+            <customcontrols:BindablePasswordBox 
+                Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Height="40"                            
+                Margin="0,5,0,0">
+            </customcontrols:BindablePasswordBox>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Height="40"
+                        Margin="5"
+                        Content="ZALOGUJ SIĘ"
+                        Command="{Binding TryToLoginCommand}"/>
+
+                <Button Height="40"
+                        Grid.Column="1"
+                        Margin="5"
+                        Content="ZALOGUJ JAKO GOŚĆ"
+                        Command="{Binding LoginAsGuestCommand}"/>
+                
+            </Grid>
+            
+            
+
+        </StackPanel>
+        
+
+    </Grid>
+</Window>
