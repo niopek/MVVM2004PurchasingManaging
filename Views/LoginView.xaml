@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:MVVM2004PurchasingManaging.Views"
         xmlns:viewmodel="clr-namespace:MVVM2004PurchasingManaging.ViewModel" xmlns:customcontrols="clr-namespace:MVVM2004PurchasingManaging.CustomControls"
         d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Background="SteelBlue" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="ToolWindow"
         Title="LoginView" Height="320" Width="300">
     
     <Grid>
-        <StackPanel>
+        
+
+        <StackPanel >
             <Label Content="LOGOWANIE" 
                    HorizontalContentAlignment="Center"
                    Style="{StaticResource LabelTitle}"
@@ -23,7 +25,6 @@
 
             <TextBox Height="40" 
                      Style="{StaticResource TextBoxForms}"
-                     Padding="5"
                      Margin="5"
                      Text="{Binding UserName}"/>
 
@@ -38,7 +39,8 @@
             <customcontrols:BindablePasswordBox 
                 Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Height="40"                            
-                Margin="0,5,0,0">
+                Margin="5"
+                >
             </customcontrols:BindablePasswordBox>
 
             <Grid>
